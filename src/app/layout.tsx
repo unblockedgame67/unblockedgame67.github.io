@@ -42,7 +42,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-    <GoogleTagManager gtmId="G-KMEPNP0KS0"/>
+    <GoogleTagManager gtmId="G-87RCK6PKRH"/>
     <body>
     <NavbarProvider>
       <ApolloWrapper>
