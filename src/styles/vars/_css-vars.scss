@@ -1,0 +1,27 @@
+@use "sass:color";
+@use "colors";
+@use "inputs";
+
+:root {
+  --app-color-accent: #{colors.$accent};
+  --app-color-headings: #{colors.$white};
+  --app-color-text: rgb(255 255 255 / 90%);
+  --app-color-light: #fce3b9;
+  --app-color-secondary: #{colors.$secondary};
+  --app-color-bg: #15290b;
+  --app-color-bg-transparent: #{color.adjust(#000, $alpha: -0.8)};
+  --app-gradient-bg:
+    radial-gradient(at 23.0% 87.0%, #0f6120 0px, transparent 50%),
+    radial-gradient(at 98.0% 17.0%, #4070c2 0px, transparent 50%),
+    radial-gradient(at 78.0% 55.0%, #1e8d9c 0px, transparent 50%),
+    radial-gradient(at 19.0% 52.0%, #7a0c61 0px, transparent 50%),
+    radial-gradient(at 18.7% 65.8%, #4fbbc4 0px, transparent 50%);
+  --app-color-primary: #{colors.$primary};
+  --app-color-link: #{colors.$white};
+  --app-color-link-hover: #{colors.$white};
+
+  // Inputs
+  --app-color-input: #{inputs.$color-input};
+  --app-color-input-border: #{inputs.$color-border};
+  --app-input-bg: #{color.adjust(#fff, $lightness: -10%)};
+}
