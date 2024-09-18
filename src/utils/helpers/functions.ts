@@ -37,9 +37,11 @@ export function decodeHtmlEntities(text: string) {
     return text.replace(/\s+/g, ' ').trim();
   }
 
-  export function replaceUrlInContent(text: string) {
+  export function replaceUrlInContent(text: (string|null) = null) {
 
-    const newText = text.replace(new RegExp(appConfig.wpDomain, 'g'), appConfig.nextDomain);
+    if (text !== null) {
+      return text.replace(new RegExp(appConfig.wpDomain, 'g'), appConfig.nextDomain);
+    }
 
-    return newText;
+    return text;
   }
