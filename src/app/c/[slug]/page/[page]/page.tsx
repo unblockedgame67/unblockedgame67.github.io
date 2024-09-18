@@ -10,12 +10,7 @@ export const metadata: Metadata = {
 
 export default async function CategoryPage({params}: { params: { slug: string, page: string } }) {
 
-  console.log('123');
-  console.log(params);
-
   const {category} = await getCategoryBySlug(params.slug);
-
-  console.log(category);
 
   if (!category) {
     return {};
@@ -38,8 +33,6 @@ export default async function CategoryPage({params}: { params: { slug: string, p
   const {posts, pagination} = await getPaginatedPostsByCategoryId(id, parseInt(params.page));
   pagination.basePath = '/c/' + slug;
 
-  console.log(pagination);
-
   return <TemplateArchive
     title={title}
     posts={posts}
@@ -52,7 +45,6 @@ export default async function CategoryPage({params}: { params: { slug: string, p
 export async function generateStaticParams({params}: {
   params: { slug: string}
 }) {
-  console.log(params);
   const {category} = await getCategoryBySlug(params.slug);
 
   if (!category) {
@@ -71,8 +63,6 @@ export async function generateStaticParams({params}: {
   const paths = [...new Array(pagesCount)].map((_, i) => {
     return { page: String(i + 1) };
   });
-
-  console.log(paths);
 
   return paths;
 }
