@@ -44,7 +44,7 @@ export default async function Home() {
   return (
     <div className="page">
 
-      <PlayerHome />
+      {/*<PlayerHome />*/}
 
       <Section
         title="All games"
