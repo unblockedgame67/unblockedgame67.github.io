@@ -11,9 +11,18 @@ import {getCategoryBySlug} from "@/utils/lib/categories";
 import Player from "@/components/Player";
 import PlayerHome from "@/components/PlayerHome/PlayerHome";
 
-export const metadata: Metadata = {
-  title: "",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getPageByUri('homepage');
+
+  if (page && page.seo) {
+    return {
+      title: page.seo.title,
+      description: page.seo.description,
+    };
+  }
+
+  return {};
+}
 
 export default async function Home() {
 
@@ -29,11 +38,6 @@ export default async function Home() {
       props: {},
       notFound: true,
     };
-  }
-
-  if (page.seo) {
-    metadata.title = page.seo.title;
-    metadata.description = page.seo.description;
   }
 
   const defaultPlayer = {
