@@ -1,6 +1,7 @@
 /**
  * decodeHtmlEntities
  */
+import appConfig from "@/utils/lib/config";
 
 export function decodeHtmlEntities(text: string) {
     interface Entities {
@@ -35,4 +36,10 @@ export function decodeHtmlEntities(text: string) {
     if (typeof text !== 'string') return;
     return text.replace(/\s+/g, ' ').trim();
   }
-  
+
+  export function replaceUrlInContent(text: string) {
+
+    const newText = text.replace(new RegExp(appConfig.wpDomain, 'g'), appConfig.nextDomain);
+
+    return newText;
+  }
