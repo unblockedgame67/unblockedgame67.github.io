@@ -39,7 +39,8 @@ export function decodeHtmlEntities(text: string) {
 
   export function replaceUrlInContent(text: (string|undefined) = undefined) {
 
-    if (text !== undefined) {
+    console.log(text);
+    if (text !== undefined && text !== null) {
       return text.replace(new RegExp(appConfig.wpDomain, 'g'), appConfig.nextDomain);
     }
 
