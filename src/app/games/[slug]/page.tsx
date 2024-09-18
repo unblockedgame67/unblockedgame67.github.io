@@ -1,4 +1,4 @@
-import {unstable_noStore, unstable_noStore as noStore} from 'next/cache';
+import {unstable_noStore} from 'next/cache';
 import {getPostBySlug, getAllPosts, getRelatedPosts} from '@/utils/lib/posts';
 import Section from '@/components/Section';
 import ContentBox from '@/components/ContentBox';
@@ -14,9 +14,18 @@ if (!appConfig.export) {
   unstable_noStore();
 }
 
-export const metadata: Metadata = {
-  title: "",
-};
+export async function generateMetadata({params}: { params: { slug: string } }): Promise<Metadata> {
+  const {post} = await getPostBySlug(params?.slug);
+
+  if (post && post.seo) {
+    return {
+      title: post.seo.title,
+      description: post.seo.description,
+    };
+  }
+
+  return {};
+}
 
 export default async function Post({params}: { params: { slug: string } }) {
 
@@ -26,11 +35,6 @@ export default async function Post({params}: { params: { slug: string } }) {
       props: {},
       notFound: true,
     };
-  }
-
-  if (post.seo) {
-    metadata.title = post.seo.title;
-    metadata.description = post.seo.description;
   }
 
   const {category: relatedCategory, posts: relatedPosts} =
