@@ -4,9 +4,18 @@ import {getPagesCount, getPaginatedPostsByCategoryId, getPostsByCategoryId} from
 import TemplateArchive from '@/templates/TemplateArchive';
 import {Metadata} from "next";
 
-export const metadata: Metadata = {
-  title: "",
-};
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const {category} = await getCategoryBySlug(params.slug);
+
+  if (category && category.seo) {
+    return {
+      title: category.seo.title,
+      description: category.seo.description,
+    };
+  }
+
+  return {};
+}
 
 export default async function CategoryPage({params}: { params: { slug: string, page: string } }) {
 
@@ -14,11 +23,6 @@ export default async function CategoryPage({params}: { params: { slug: string, p
 
   if (!category) {
     return {};
-  }
-
-  if (category.seo) {
-    metadata.title = category.seo.title;
-    metadata.description = category.seo.description;
   }
 
   const {id, title, content, slug} = category;
