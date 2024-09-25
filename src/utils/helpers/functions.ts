@@ -41,7 +41,9 @@ export function decodeHtmlEntities(text: string) {
 
     console.log(text);
     if (text !== undefined && text !== null) {
-      return text.replace(new RegExp(appConfig.wpDomain, 'g'), appConfig.nextDomain);
+      for (let i = 0; i < appConfig.wpDomain.length; i++) {
+         text = text.replace(new RegExp(appConfig.wpDomain[i], 'g'), appConfig.nextDomain)
+      }
     }
 
     return text;
