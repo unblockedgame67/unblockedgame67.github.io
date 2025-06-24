@@ -8,7 +8,7 @@ import {unstable_noStore} from "next/cache";
 import {Metadata} from "next";
 import appConfig from "@/utils/lib/config";
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: { slug: string, page: string } }): Promise<Metadata> {
   const page = await getPageByUri('homepage');
   const currentPage = parseInt(params.page);
 
@@ -69,19 +69,6 @@ export default async function HomeGames({params}: { params: { page: number } }) 
           />
         )}
       </Section>
-
-      {page.content && (
-        <Section>
-          <ContentBox>
-            <div
-              className="content"
-              dangerouslySetInnerHTML={{
-                __html: page.content,
-              }}
-            />
-          </ContentBox>
-        </Section>
-      )}
     </div>
   );
 }
